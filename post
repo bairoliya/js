@@ -1,0 +1,44 @@
+function readLines(bufReader) {
+
+var req = {header:[],body:[]};
+
+try {
+
+var line;
+
+var postData = null;
+
+while ((line = bufReader.readLine()) != null && line.length() != 0) {
+
+//print(line)
+
+if(line.indexOf("Content-Length:") > -1) {
+
+postData = line.substring(line.indexOf("Content-Length:") + 16, line.length()).trim();
+
+}
+
+req.header.push(line);
+
+}
+
+//print(postData)
+
+if(postData){
+
+var charArr = new CharArray(postData);
+
+bufReader.read(charArr,0,postData);
+
+req.body.push(new java.lang.String(charArr));
+
+}
+
+} catch (e) {
+
+}
+
+return req;
+
+}
+
