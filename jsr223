@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCase name="scripting" version="5">
+  <meta>
+    <create version="10.3.0" buildNumber="10.3.0.291" author="admin" date="07/30/2024" host="localhost" />
+    <lastEdited version="10.3.0" buildNumber="10.3.0.291" author="admin" date="11/07/2018" host="localhost" />
+  </meta>
+  <id>89FD4FB3178B11E499D910DDB1E3EF62</id>
+  <Documentation>LISA can now take advantage of JSR-223 scripting engines, allowing you to use a large variety of scriptin engines in script steps, assertions, data protocol handlers, match scripts and just about anywhere using {{=%language% }} syntax</Documentation>
+  <IsInProject>true</IsInProject>
+  <sig>ZWQ9NSZ0Y3Y9NSZsaXNhdj0xMC4zLjAgKDEwLjMuMC4yOTEpJm5vZGVzPS00NjA4NzkyMTI=</sig>
+  <subprocess>false</subprocess>
+  <initState />
+  <resultState />
+  <deletedProps />
+  <Node name="Embedded expressions" log="" type="com.itko.lisa.test.TestNodeLogger" version="1" uid="4261582E179111E494B010DDB1E3EF62" think="500-1S" useFilters="true" quiet="true" next="JavaScript">
+    <Documentation>You can embedd scripts just about anywhere with {{expressions}}.</Documentation>
+    <!-- Assertions -->
+    <CheckResult assertTrue="false" name="Good JavaScript" type="com.itko.lisa.test.CheckResultContains">
+      <log>Assertion name: Good JavaScript checks for: false  is of type: Result as String Contains Given String.</log>
+      <then>fail</then>
+      <valueToAssertKey />
+      <param>JavaScript (result should be 'HELLO HELLO'): HELLO HELLO</param>
+    </CheckResult>
+    <CheckResult assertTrue="false" name="Good Groovy" type="com.itko.lisa.test.CheckResultContains">
+      <log>Assertion name: Good Groovy checks for: false  is of type: Result as String Contains Given String.</log>
+      <then>fail</then>
+      <valueToAssertKey />
+      <param>Groovy (result should be 'blue'): blue</param>
+    </CheckResult>
+    <CheckResult assertTrue="false" name="Good beanshell" type="com.itko.lisa.test.CheckResultContains">
+      <log>Assertion name: Good beanshell checks for: false  is of type: Result as String Contains Given String.</log>
+      <then>fail</then>
+      <valueToAssertKey />
+      <param>Beanshell (result should be 'UPPERCASE'): UPPERCASE</param>
+    </CheckResult>
+    <log>Anywhere you use {{expressions}} you can specify a scripting language
+{{=%velocity%    
+Hello from Velocity. The host name is $LISA_HOST
+}}
+
+Beanshell (result should be 'UPPERCASE'): {{=%beanshell%  
+    return new String("uppercase").toUpperCase();
+}}
+
+Groovy (result should be 'blue'): {{=%groovy% 
+  class AGroovyBean {
+    String color
+  }
+ 
+  def myGroovyBean = new AGroovyBean()
+  myGroovyBean.setColor('blue')
+  myGroovyBean.getColor()
+}} 
+
+JavaScript (result should be 'HELLO HELLO'): {{=%javascript%
+    var doubleUpper = function(s) {
+    var upper = s.toUpperCase()
+    return upper + " " + upper
+}
+doubleUpper("hello")
+}}
+
+The default language is now {{=com.itko.lisa.test.ScriptExecHandler.getDefaultLanguage()}}
+
+You can change the default language by setting lisa.scripting.default.language in local.properties
+or in the testExec or config, for example lisa.scripting.default.language=groovy
+
+LISA ships with JavaScript, Groovy, Beanshell and Velocity engines on all platforms. 
+
+To install a new engine simply drop the jar(s) into LISA_HOME/lib or LISA_HOME/bin
+
+Script engines exist for the following languages:
+    · ABCL
+    · AppleScript
+    · AWK
+    · BeanShell
+    · Bex
+    · CajuScript
+    · ejs
+    · FreeMarker
+    · Groovy
+    · Jaskell
+    · Java
+    · JavaFX
+    · JavaScript
+    · Jelly
+    · JEP
+    · Jexl
+    · jst
+    · JudoScript
+    · JUEL
+    · MathEclipse
+    · OCaml
+    · OGNL
+    · PHP
+    · Pnuts
+    · Python
+    · Ruby
+    · Scheme
+    · Sleep 
+    · Smalltalk
+    · Tcl
+    · Velocity
+    · XPath
+    · XSLT</log>
+  </Node>
+  <Node name="JavaScript" log="" type="com.itko.lisa.test.UserScriptNode" version="1" uid="9CCE0DAA178B11E499D910DDB1E3EF62" think="500-1S" useFilters="true" quiet="false" next="Groovy">
+    <Documentation>An example of the built-in Rhino (javascript) engine</Documentation>
+    <!-- Assertions -->
+    <CheckResult assertTrue="true" name="Any Exception Then Fail" type="com.itko.lisa.dynexec.CheckInvocationEx">
+      <log>Assertion name: Any Exception Then Fail checks for: true  is of type: Assert on Invocation Exception.</log>
+      <then>fail</then>
+      <valueToAssertKey />
+      <param>.*</param>
+    </CheckResult>
+    <CheckResult assertTrue="false" name="JavaScript Assertion" type="com.itko.lisa.test.AssertByScript">
+      <log>Assertion name: JavaScript Assertion checks for: false  is of type: Assert by Script Execution.</log>
+      <then>fail</then>
+      <valueToAssertKey />
+      <script>// This script should return a boolean result indicating the assertion is true or false
+_logger.info("JavaScript assertion")
+
+
+"6".equals(LASTRESPONSE.toString())</script>
+      <language>ECMAScript</language>
+      <copyprops>TestExecProps</copyprops>
+    </CheckResult>
+    <onerror>abort</onerror>
+    <language>ECMAScript</language>
+    <copyProps>TestExecProps</copyProps>
+    <script>// built-in logger object
+
+// will log to the log file as well as the test event stream
+_logger.info("Hello from JavaScript at " + LISA_PROJ_NAME)
+_logger.warn("this is a test warning that can be ignored");
+
+// interact directly with testExec
+testExec.setStateObject("Hello", "JavaScript World")
+
+// look Ma, no semicolons!
+
+var sum = function() {
+    var i, x = 0
+    for (i = 0; i &lt; arguments.length; ++i) {
+        x += arguments[i]
+    }
+    return x
+}
+var mySum = sum(1, 2, 3) // returns 6
+
+// implicit return value back to LISA
+// the last expression evaluated is our return value
+mySum.toString()</script>
+  </Node>
+  <Node name="Groovy" log="" type="com.itko.lisa.test.UserScriptNode" version="1" uid="852840DC178E11E494B010DDB1E3EF62" think="500-1S" useFilters="true" quiet="false" next="Beanshell">
+    <Documentation>An example of the groovy engine that is shipped with LISA.</Documentation>
+    <!-- Assertions -->
+    <CheckResult assertTrue="true" name="Any Exception Then Fail" type="com.itko.lisa.dynexec.CheckInvocationEx">
+      <log>Assertion name: Any Exception Then Fail checks for: true  is of type: Assert on Invocation Exception.</log>
+      <then>fail</then>
+      <valueToAssertKey />
+      <param>.*</param>
+    </CheckResult>
+    <CheckResult assertTrue="false" name="Groovy Assertion" type="com.itko.lisa.test.AssertByScript">
+      <log>Assertion name: Groovy Assertion checks for: false  is of type: Assert by Script Execution.</log>
+      <then>fail</then>
+      <valueToAssertKey />
+      <script>// you can do anything with Groovy here.
+// as a quick demo let's use the 'tr' String function which is
+// exclusive to Groovy..
+
+_logger.info("groovy assertion")
+
+return LASTRESPONSE.tr("I", "i").equals("i'm flying!");</script>
+      <language>Groovy</language>
+      <copyprops>TestExecProps</copyprops>
+    </CheckResult>
+    <onerror>abort</onerror>
+    <language>Groovy</language>
+    <copyProps>TestExecProps</copyProps>
+    <script>// built-in logger object
+_logger.info("Hello from Groovy at " + LISA_PROJ_NAME)
+
+// interact directly with testExec
+testExec.setStateObject("Hello", "Groovy World")
+
+trait FlyingAbility { 
+    String fly() { "I'm flying!" } 
+}
+
+class Bird implements FlyingAbility {} 
+def bird = new Bird() 
+
+return bird.fly()</script>
+  </Node>
+  <Node name="Beanshell" log="" type="com.itko.lisa.test.UserScriptNode" version="1" uid="36191377179011E494B010DDB1E3EF62" think="500-1S" useFilters="true" quiet="false" next="end">
+    <Documentation>Beanshell has been upgraded to version 2.1.8</Documentation>
+    <!-- Assertions -->
+    <CheckResult assertTrue="true" name="Any Exception Then Fail" type="com.itko.lisa.dynexec.CheckInvocationEx">
+      <log>Assertion name: Any Exception Then Fail checks for: true  is of type: Assert on Invocation Exception.</log>
+      <then>fail</then>
+      <valueToAssertKey />
+      <param>.*</param>
+    </CheckResult>
+    <CheckResult assertTrue="false" name="Beanshell Assertion" type="com.itko.lisa.test.AssertByScript">
+      <log>Assertion name: Beanshell Assertion checks for: false  is of type: Assert by Script Execution.</log>
+      <then>fail</then>
+      <valueToAssertKey />
+      <script>// This script should return a boolean result indicating the assertion is true or false
+_logger.info("beanshell assertion");
+
+return "Greetings from beanshell".equals(LASTRESPONSE);</script>
+      <language>BeanShell</language>
+      <copyprops>TestExecPropsAndSystemProps</copyprops>
+    </CheckResult>
+    <onerror>abort</onerror>
+    <language>BeanShell</language>
+    <copyProps>TestExecObject</copyProps>
+    <script>/* 
+ This is similar to the deprecated scripting step in that
+ we are using beanshell, only this time we set the step to 
+ only inject two variables into scope - the testExec and 
+ the _logger.  This speeds things up a bit if you don't 
+ need direct access to the testExec variables (you can 
+ still get to them)
+*/
+
+// this goes to the LISA log file. Useful for debugging
+_logger.info("Hello from beanshell at " + testExec.getStateObject("LISA_PROJ_NAME"));
+
+testExec.setStateObject("OS_NAME", System.getProperty("os.name"));
+
+return "Greetings" + " from " + "beanshell";</script>
+  </Node>
+  <Node name="end" log="" type="com.itko.lisa.test.NormalEnd" version="1" uid="89FD4FB9178B11E499D910DDB1E3EF62" think="0h" useFilters="true" quiet="true" next="fail" />
+  <Node name="fail" log="" type="com.itko.lisa.test.Abend" version="1" uid="89FD4FB7178B11E499D910DDB1E3EF62" think="0h" useFilters="true" quiet="true" next="abort" />
+  <Node name="abort" log="" type="com.itko.lisa.test.AbortStep" version="1" uid="89FD4FB5178B11E499D910DDB1E3EF62" think="0h" useFilters="true" quiet="true" next="" />
+</TestCase>
