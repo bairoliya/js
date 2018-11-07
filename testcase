@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCase name="JS" version="5">
+  <meta>
+    <create version="10.3.0" buildNumber="10.3.0.291" author="admin" date="11/07/2028" host="localhost" />
+    <lastEdited version="10.3.0" buildNumber="10.3.0.291" author="admin" date="11/07/2028" host="localhost" />
+  </meta>
+  <id>63CA147EE2A111E888BA7831C1C59F50</id>
+  <Documentation>Put documentation of the Test Case here.</Documentation>
+  <IsInProject>true</IsInProject>
+  <sig>ZWQ9NSZ0Y3Y9NSZsaXNhdj0xMC4zLjAgKDEwLjMuMC4yOTEpJm5vZGVzPS01OTcxNTA3Mg==</sig>
+  <subprocess>false</subprocess>
+  <initState />
+  <resultState />
+  <deletedProps />
+  <Node name="Execute script (JSR-223)" log="" type="com.itko.lisa.test.UserScriptNode" version="1" uid="67073E3AE2A111E888BA7831C1C59F50" think="500-1S" useFilters="true" quiet="false" next="Parse Text as Response">
+    <!-- Assertions -->
+    <CheckResult assertTrue="true" name="Any Exception Then Fail" type="com.itko.lisa.dynexec.CheckInvocationEx">
+      <log>Assertion name: Any Exception Then Fail checks for: true is of type: Assert on Invocation Exception.</log>
+      <then>fail</then>
+      <valueToAssertKey />
+      <param>.*</param>
+    </CheckResult>
+    <onerror>abort</onerror>
+    <language>ECMAScript</language>
+    <copyProps>TestExecProps</copyProps>
+    <script>load('https://cdnjs.cloudflare.com/ajax/libs/html-minifier/3.3.3/htmlminifier.js')
+//minify = require('html-minifier').minify;
+//input = '&lt;div&gt; &lt;p&gt;    foo &lt;/p&gt;    &lt;/div&gt;';
+//output = minify(input, { collapseWhitespace: true });</script>
+  </Node>
+  <Node name="Parse Text as Response" log="" type="com.itko.lisa.utils.ParseTextContentNode" version="1" uid="4852A8D9E2B311E8BBE37831C1C59F50" think="500-1S" useFilters="true" quiet="true" next="Execute script (JSR-223)~1">
+    <text>e3tzdW4uc2VjdXJpdHkuc3NsLmFsbG93VW5zYWZlUmVuZWdvdGlhdGlvbn19</text>
+  </Node>
+  <Node name="Execute script (JSR-223)~1" log="" type="com.itko.lisa.test.UserScriptNode" version="1" uid="A2E2E7E9E2B411E8BBE37831C1C59F50" think="500-1S" useFilters="true" quiet="false" next="end">
+    <!-- Assertions -->
+    <CheckResult assertTrue="true" name="Any Exception Then Fail" type="com.itko.lisa.dynexec.CheckInvocationEx">
+      <log>Assertion name: Any Exception Then Fail checks for: true is of type: Assert on Invocation Exception.</log>
+      <then>fail</then>
+      <valueToAssertKey />
+      <param>.*</param>
+    </CheckResult>
+    <onerror>abort</onerror>
+    <language>BeanShell</language>
+    <copyProps>TestExecProps</copyProps>
+    <script>import javax.script.*;
+import com.itko.lisa.test.ScriptExecHandler;
+ 
+ScriptEngine engine = ScriptExecHandler.getEngineByName("javascript");
+return engine instanceof Compilable;</script>
+  </Node>
+  <Node name="end" log="" type="com.itko.lisa.test.NormalEnd" version="1" uid="63CA1484E2A111E888BA7831C1C59F50" think="0h" useFilters="true" quiet="true" next="fail" />
+  <Node name="fail" log="" type="com.itko.lisa.test.Abend" version="1" uid="63CA1482E2A111E888BA7831C1C59F50" think="0h" useFilters="true" quiet="true" next="abort" />
+  <Node name="abort" log="" type="com.itko.lisa.test.AbortStep" version="1" uid="63CA1480E2A111E888BA7831C1C59F50" think="0h" useFilters="true" quiet="true" next="" />
+</TestCase>
