@@ -7,3 +7,122 @@ output = minify(input, { collapseWhitespace: true });
 
 // https://validatejs.org/
 // https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js
+
+/*
+*
+============================================================================
+| Error in Script
+============================================================================
+| Step:        Execute script (JSR-223)
+----------------------------------------------------------------------------
+| Message:     javax.net.ssl.SSLException: Received fatal alert: no_renegotiation
+----------------------------------------------------------------------------
+| Trapped Exception: javax.net.ssl.SSLException: Received fatal alert: no_renegotiation
+| Trapped Message:   java.lang.RuntimeException: javax.net.ssl.SSLException: Received fatal alert: no_renegotiation
+----------------------------------------------------------------------------
+STACK TRACE
+java.lang.RuntimeException: javax.net.ssl.SSLException: Received fatal alert: no_renegotiation
+	at jdk.nashorn.internal.runtime.ScriptRuntime.apply(ScriptRuntime.java:397)
+	at jdk.nashorn.api.scripting.NashornScriptEngine.evalImpl(NashornScriptEngine.java:446)
+	at jdk.nashorn.api.scripting.NashornScriptEngine.access$200(NashornScriptEngine.java:73)
+	at jdk.nashorn.api.scripting.NashornScriptEngine$3.eval(NashornScriptEngine.java:507)
+	at javax.script.CompiledScript.eval(CompiledScript.java:106)
+	at com.itko.lisa.test.ScriptExecHandler.executeCompiledScript(ScriptExecHandler.java:501)
+	at com.itko.lisa.test.UserScriptNode._execute(UserScriptNode.java:218)
+	at com.itko.lisa.editor.UserScriptNodeEditor.execute(UserScriptNodeEditor.java:214)
+	at com.itko.lisa.editor.UserScriptNodeEditor.access$000(UserScriptNodeEditor.java:49)
+	at com.itko.lisa.editor.UserScriptNodeEditor$1.actionPerformed(UserScriptNodeEditor.java:73)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.Component.processMouseEvent(Component.java:6533)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6298)
+	at java.awt.Container.processEvent(Container.java:2236)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2294)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
+	at java.awt.Container.dispatchEventImpl(Container.java:2280)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.awt.EventQueue$4.run(EventQueue.java:729)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: javax.net.ssl.SSLException: Received fatal alert: no_renegotiation
+	at sun.security.ssl.Alerts.getSSLException(Alerts.java:208)
+	at sun.security.ssl.Alerts.getSSLException(Alerts.java:154)
+	at sun.security.ssl.SSLSocketImpl.recvAlert(SSLSocketImpl.java:2023)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:1125)
+	at sun.security.ssl.SSLSocketImpl.readDataRecord(SSLSocketImpl.java:930)
+	at sun.security.ssl.AppInputStream.read(AppInputStream.java:105)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:286)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:704)
+	at sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:647)
+	at sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:675)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1536)
+	at sun.net.www.protocol.http.HttpURLConnection.access$200(HttpURLConnection.java:90)
+	at sun.net.www.protocol.http.HttpURLConnection$9.run(HttpURLConnection.java:1433)
+	at sun.net.www.protocol.http.HttpURLConnection$9.run(HttpURLConnection.java:1431)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.AccessController.doPrivilegedWithCombiner(AccessController.java:782)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1430)
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:254)
+	at jdk.nashorn.internal.runtime.Source$URLData.load(Source.java:329)
+	at jdk.nashorn.internal.runtime.Source.sourceFor(Source.java:114)
+	at jdk.nashorn.internal.runtime.Source.sourceFor(Source.java:469)
+	at jdk.nashorn.internal.runtime.Source.sourceFor(Source.java:454)
+	at jdk.nashorn.internal.runtime.Context.load(Context.java:799)
+	at jdk.nashorn.internal.objects.Global.load(Global.java:1530)
+	at jdk.nashorn.internal.scripts.Script$1$\^eval\_.:program(<eval>:1)
+	at jdk.nashorn.internal.runtime.ScriptFunctionData.invoke(ScriptFunctionData.java:637)
+	at jdk.nashorn.internal.runtime.ScriptFunction.invoke(ScriptFunction.java:494)
+	at jdk.nashorn.internal.runtime.ScriptRuntime.apply(ScriptRuntime.java:393)
+	... 45 more
+============================================================================
+
+
+
+https://stackoverflow.com/questions/33363886/java-ssl-handshake-alert-no-negotiation
+
+It looked like server was not updated to RFC 5746.
+
+I stumbled upon https://www.digicert.com/news/2011-06-03-ssl-renego.htm and foud
+
+If the server does not respond in accordance with RFC 5746, the client MUST abort the renegotiation handshake.
+
+Then I found http://www.oracle.com/technetwork/java/javase/overview/tlsreadme2-176330.html
+
+sun.security.ssl.allowUnsafeRenegotiation - Introduced in Phase 1, this controls whether legacy (unsafe) renegotiations are permitted.
+
+A temporary fix was to add System property
+
+-Dsun.security.ssl.allowUnsafeRenegotiation=true
+
+but that turned out not to be the real reason error happened. The real reason was that my client was using old SSL.
+
+tlsClientParameters.setSecureSocketProtocol("SSL");
+
+I commented that line, so the default value is used: "TLS" and after that the communication worked just fine.
+*/
