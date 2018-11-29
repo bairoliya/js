@@ -1,0 +1,15 @@
+/**
+* $ /Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/bin/jjs
+* jjs> load("https://raw.github.com/lodash/lodash/3.10.1/lodash.js")
+* jjs> _.map([1, 2, 3], function(n) { return n * 3; });
+* 3,6,9
+* 
+* jjs> typeof require
+* undefined
+*
+* jjs> load("https://raw.githubusercontent.com/nodyn/jvm-npm/master/src/main/javascript/jvm-npm.js")
+* jjs> typeof require
+* function
+*
+*
+*/
